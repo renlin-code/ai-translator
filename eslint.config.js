@@ -16,6 +16,7 @@ export default [
       "react/jsx-no-target-blank": "off",
       "quotes": ["error", "double"],
       "indent": ["error", 2],
+      "semi": ["error", "always"],
     }
   }
 ];
