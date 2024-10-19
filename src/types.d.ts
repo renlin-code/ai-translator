@@ -5,16 +5,21 @@ export type AutoLanguage = typeof AUTO_LANG;
 export type FromLanguage = Language | AutoLanguage;
 
 export interface State {
-  langFrom: string;
-  langTo: string;
+  langFrom: FromLanguage;
+  langTo: Language;
   textFrom: string;
   result: string;
   isLoading: boolean;
 };
 
 export type Action = 
-  | { type: "INTERCHANGE_LANG" }
+  | { type: "SWITCH_LANG" }
   | { type: "SET_LANG_FROM", payload: FromLanguage }
   | { type: "SET_LANG_TO", payload: Language }
   | { type: "SET_TEXT_FROM", payload: string }
   | { type: "SET_RESULT", payload: string }
+
+export enum SectionType {
+  From = "from",
+  To = "to",
+}
