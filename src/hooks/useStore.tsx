@@ -35,7 +35,7 @@ function reducer(state: State, action: Action): State {
   case "SET_TEXT_FROM":
     return {
       ...state,
-      isLoading: true,
+      isLoading: !!action.payload.trim(),
       textFrom: action.payload,
       result: "",
     };

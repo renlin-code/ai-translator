@@ -7,6 +7,8 @@ import { IconSwitch } from "./components/Icons";
 import { LanguageSelector } from "./components/LanguageSelector";
 import { Textarea } from "./components/Textarea";
 import { SectionType } from "./types.d";
+import { useEffect } from "react";
+import { translateText } from "./services/translate";
 
 function App() {
   const {
@@ -14,13 +16,27 @@ function App() {
     langTo,
     textFrom,
     result,
+    isLoading,
     switchLang,
     setLangFrom,
     setLangTo,
     setTextFrom,
     setResult,
-    isLoading,
   } = useStore();
+
+
+  useEffect(() => {
+    if (textFrom.trim() === "") return;
+
+    translateText(textFrom, langTo).then((res) => {
+      const [result, sourceLang] = res;
+      
+      setResult(result);
+      if (langFrom === AUTO_LANG) {
+        setLangFrom(sourceLang);
+      }
+    });
+  }, [textFrom, langTo]);
 
   return (
     <Container fluid>
@@ -28,7 +44,7 @@ function App() {
       <Row>
         <Col>
           <Stack gap={2}>
-            <LanguageSelector type={SectionType.From} value={langFrom} onChange={setLangFrom} />
+            <LanguageSelector type={SectionType.From} value={langFrom} except={langTo} onChange={setLangFrom} />
             <Textarea 
               type={SectionType.From}
               placeholder="Enter text"
@@ -44,7 +60,7 @@ function App() {
         </Col>
         <Col>
           <Stack gap={2}>
-            <LanguageSelector type={SectionType.To} value={langTo} onChange={setLangTo} />
+            <LanguageSelector type={SectionType.To} value={langTo} except={langFrom} onChange={setLangTo} />
             <Textarea 
               type={SectionType.To}
               placeholder="Translated text"

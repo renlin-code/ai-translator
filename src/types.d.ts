@@ -1,6 +1,6 @@
 import { AUTO_LANG, SUPPORTED_LANGS } from "./consts";
 
-export type Language = keyof typeof SUPPORTED_LANGS;
+export type Language = typeof SUPPORTED_LANGS[number]["locale"];
 export type AutoLanguage = typeof AUTO_LANG;
 export type FromLanguage = Language | AutoLanguage;
 
