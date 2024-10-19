@@ -4,7 +4,7 @@ import { AUTO_LANG } from "../consts";
 
 const initialState: State = {
   langFrom: "auto",
-  langTo: "en",
+  langTo: "EN",
   textFrom: "",
   result: "",
   isLoading: false,

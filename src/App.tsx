@@ -9,6 +9,7 @@ import { Textarea } from "./components/Textarea";
 import { SectionType } from "./types.d";
 import { useEffect } from "react";
 import { translateText } from "./services/translate";
+import { useDebounce } from "./hooks/useDebounce";
 
 function App() {
   const {
@@ -24,23 +25,22 @@ function App() {
     setResult,
   } = useStore();
 
+  const debouncedTextFrom = useDebounce(textFrom, 300);
 
   useEffect(() => {
-    if (textFrom.trim() === "") return;
+    if (debouncedTextFrom.trim() === "") return;
 
-    translateText(textFrom, langTo).then((res) => {
+    translateText(debouncedTextFrom, langTo).then((res) => {
       const [result, sourceLang] = res;
       
       setResult(result);
-      if (langFrom === AUTO_LANG) {
-        setLangFrom(sourceLang);
-      }
+      setLangFrom(sourceLang);
     });
-  }, [textFrom, langTo]);
+  }, [debouncedTextFrom, langTo]);
 
   return (
     <Container fluid>
-      <h1 style={{marginBottom: "50px", textAlign: "center"}}>My Translator</h1>
+      <h1 style={{marginBottom: "20px", textAlign: "center"}}>My Translator</h1>
       <Row>
         <Col>
           <Stack gap={2}>
