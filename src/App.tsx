@@ -108,8 +108,7 @@ function App() {
               onChange={setResult}
             />
             <Col 
-              style={{ display: "grid", gridTemplateColumns: "1fr 1fr", width: "50%" }}
-              hidden={!result}
+              style={{ display: "grid", gridTemplateColumns: "1fr 1fr", width: "50%", visibility: !result ? "hidden" : "visible" }}
             >
               <Button
                 style={{ gridColumn: "1 / 2" }}
