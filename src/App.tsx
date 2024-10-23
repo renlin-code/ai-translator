@@ -39,7 +39,10 @@ function App() {
       const [result, sourceLang] = res;
 
       setResult(result);
-      setLangFrom(sourceLang);
+      
+      if (langFrom === AUTO_LANG) {
+        setLangFrom(sourceLang);
+      }
 
       const langVoice = SUPPORTED_LANGS.find(
         (lang) => lang.locale === langTo
@@ -47,7 +50,7 @@ function App() {
 
       setShowVoiceBtn(!!langVoice);
     });
-  }, [debouncedTextFrom, langTo]);
+  }, [debouncedTextFrom, langFrom, langTo]);
 
 
   const handleCopy = () => {
@@ -63,10 +66,10 @@ function App() {
 
   return (
     <Container fluid>
-      <h1 style={{ marginBottom: "20px", textAlign: "center" }}>
+      <h1 style={{ marginBottom: "30px", textAlign: "center" }}>
         My Translator
       </h1>
-      <Row>
+      <Row className="row" style={{ marginBottom: "10px" }}>
         <Col>
           <Stack gap={2}>
             <LanguageSelector
@@ -131,6 +134,7 @@ function App() {
           </Stack>
         </Col>
       </Row>
+      <span className="">Developed by: <a href="https://renlin-code.ru" target="_blank">Rene Linares</a></span>
     </Container>
   );
 }

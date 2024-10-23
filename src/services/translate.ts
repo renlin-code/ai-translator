@@ -12,7 +12,7 @@ interface TranslationResponse {
 
 export async function translateText(
   text: string,
-  targetLang: string
+  targetLang: string,
 ): Promise<[string, string]> {
   try {
     const response = await axios.post<TranslationResponse>(
