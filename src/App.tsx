@@ -67,7 +67,7 @@ function App() {
   return (
     <Container fluid>
       <h1 style={{ marginBottom: "30px", textAlign: "center" }}>
-        My Translator
+        AI Translator
       </h1>
       <Row className="row" style={{ marginBottom: "10px" }}>
         <Col>
